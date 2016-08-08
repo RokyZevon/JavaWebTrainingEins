@@ -30,12 +30,13 @@ public class UserRoleServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		String userid =null == request.getParameter("userid")?"":request.getParameter("userid");
 		String state = request.getParameter("state");
-
+		String countpage = request.getParameter("countpage");
 		if("init".equals(state)&&!"".equals(userid))
 		{
 			Map<String, Role> map = userRoleService.getRole(userid);
 			request.setAttribute("roles", map);
 			request.setAttribute("userid", userid);
+			request.setAttribute("countpage", countpage);
 			request.getRequestDispatcher("views/userrolemanager.jsp").forward(request, response);
 		}
 		if("update".equals(state))

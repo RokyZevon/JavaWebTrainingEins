@@ -42,13 +42,13 @@
 	function doAgain()
 	{
 		document.getElementById("btn_again").addEventListener("click",()=>{
-			window.location.href="role.add.servlet?countpage="+${countpage};
+			window.location.href="role.add.servlet?state=init&countpage="+${countpage};
 		},false)
 	}
 	function doBack()
 	{
 		document.getElementById("btn_back").addEventListener("click",()=>{
-			window.location.href="role.servlet?countpage="+${countpage};
+			window.location.href="role.servlet?state=init&countpage="+${countpage};
 		},false)
 	}
 	function init()

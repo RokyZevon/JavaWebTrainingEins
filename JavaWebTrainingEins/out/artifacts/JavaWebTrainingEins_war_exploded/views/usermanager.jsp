@@ -101,9 +101,47 @@ function cbx_select(){
 	function dojump_page()
 	{
 		document.getElementById("select_jump").addEventListener("change",()=>{
-			window.location.href="user.servlet?countpage="+document.getElementById("select_jump").value;
+			window.location.href="user.servlet?state=init&countpage="+document.getElementById("select_jump").value;
 		},false)
 	}
+	function dorole()
+	{
+		document.getElementById("btn_role").addEventListener("click",()=>{
+			var input_cbxs = document.getElementsByName("ids");
+			let state = "";
+			var count = 0;
+			for(let i = 0 ,len = input_cbxs.length;i<len;i++)
+			{
+				if(input_cbxs[i].checked == true)
+				{
+					count ++;
+					if(state=="")
+					{
+						state += input_cbxs[i].dataset.id; 
+					}
+					else
+					{
+						state+=",";
+						
+						state+=input_cbxs[i].dataset.id; 
+					}
+				}
+			}
+			if(count >1)
+			{
+				alert("一次只能修改一组数据，请重新选择您要修改的用户！！！");
+			}
+			else if(count == 1)
+			{
+				window.location.href="user.role.servlet?state=init&userid="+state+"&countpage="+${requestScope.page.countpage};
+			}
+			else
+			{
+				alert("请选择您要修改的用户！！！");
+			}
+		},false)		
+	}
+	
 	function init()
 	{
 		cbx_select();
@@ -111,6 +149,7 @@ function cbx_select(){
 		doAdd();
 		doUpdate();
 		dojump_page();
+		dorole();
 	}
 	window.addEventListener( "load", ()=>{
 		init();
@@ -143,9 +182,9 @@ function cbx_select(){
 		<div  class="table_row">
 			<c:if test = "${requestScope.page.countpage==1 }">首页 &nbsp;上一页</c:if>
 			<c:if test = "${requestScope.page.countpage!=1 }">
-				<a href="user.servlet?countpage=1">首页</a> 
+				<a href="user.servlet?state=init&countpage=1">首页</a> 
 				&nbsp;
-				<a href="user.servlet?countpage=${requestScope.page.countpage-1 }">上一页</a> 
+				<a href="user.servlet?state=init&countpage=${requestScope.page.countpage-1 }">上一页</a> 
 			</c:if>
 			&nbsp;
 			<select id="select_jump">
@@ -161,15 +200,16 @@ function cbx_select(){
 			&nbsp;
 			<c:if test="${requestScope.page.countpage==requestScope.page.totalpages }">下一页&nbsp; 末页</c:if>
 			<c:if test="${requestScope.page.countpage!=requestScope.page.totalpages }">
-				<a href="user.servlet?countpage=${requestScope.page.countpage+1 }">下一页 </a>
+				<a href="user.servlet?state=init&countpage=${requestScope.page.countpage+1 }">下一页 </a>
 				&nbsp;
-				<a href="user.servlet?countpage=${requestScope.page.totalpages }">末页</a>
+				<a href="user.servlet?state=init&countpage=${requestScope.page.totalpages }">末页</a>
 			</c:if>	
 		</div>
 		<div>
 			<button type = "button" id = "btn_add" >增加</button>
 			<button type = "button" id = "btn_delete">删除</button>
-			<button type = "button" id = "btn_update">修改</button>
+			<button type = "button" id = "btn_update">修改用户信息</button>
+			<button type = "button" id = "btn_role">修改用户角色</button>
 		</div>
 	</div>
 	

@@ -1,7 +1,6 @@
 package com.cnstrong.web.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -23,7 +22,10 @@ public class UserUpdateServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		String ids =null == request.getParameter("ids")?"":request.getParameter("ids");
 		String countpage =null == request.getParameter("countpage")?"":request.getParameter("countpage");
 		if(!"".equals(ids))

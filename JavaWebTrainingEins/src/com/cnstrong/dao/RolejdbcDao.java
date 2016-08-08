@@ -43,7 +43,7 @@ public class RolejdbcDao implements RoleDao{
 				e.printStackTrace();
 			}
 			page.setPagelist(list);
-		
+			DBUtil.closeConn(conn);
 	}
 
 	@Override
@@ -64,6 +64,7 @@ public class RolejdbcDao implements RoleDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(connection);
 		return totalrows;
 	}
 
@@ -85,6 +86,7 @@ public class RolejdbcDao implements RoleDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(conn);
 		return map;
 	}
 
@@ -103,6 +105,7 @@ public class RolejdbcDao implements RoleDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(conn);
 	}
 
 	@Override
@@ -111,7 +114,6 @@ public class RolejdbcDao implements RoleDao{
 		Connection conn  = null;
 		conn=DBUtil.getConn();
 		try {
-		
 			PreparedStatement state= conn.prepareStatement(sql);
 			state.setInt(1, roleid);
 			state.execute();
@@ -119,6 +121,7 @@ public class RolejdbcDao implements RoleDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(conn);
 	}
 
 	@Override
@@ -158,6 +161,7 @@ public class RolejdbcDao implements RoleDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(conn);
 		return list;
 	}
 	@Override

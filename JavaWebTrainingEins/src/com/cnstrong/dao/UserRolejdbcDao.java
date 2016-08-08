@@ -49,6 +49,7 @@ public class UserRolejdbcDao implements UserRoleDao{
 				e1.printStackTrace();
 			}
 		}
+		DBUtil.closeConn(connection);
 		return flag;
 	}
 
@@ -70,6 +71,7 @@ public class UserRolejdbcDao implements UserRoleDao{
 			// TODO Auto-generated catch block
 			logger.info("query all error..."+e.getMessage());
 		}
+		DBUtil.closeConn(connection);
 		return map;
 	}
 
@@ -91,6 +93,7 @@ public class UserRolejdbcDao implements UserRoleDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(connection);
 		return flag;
 	}
 

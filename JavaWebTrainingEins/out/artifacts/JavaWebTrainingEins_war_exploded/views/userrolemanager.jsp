@@ -7,10 +7,26 @@
 <link rel="stylesheet" type = "text/css" href="css/base.css"/>
 <head>
 <meta  charset="UTF-8">
+
 <title>用户角色管理</title>
+<script type="text/javascript">
+function doBack()
+{
+	document.getElementById("btn_back").addEventListener("click",()=>{
+		window.location.href="user.servlet?state=init&countpage="+${countpage};
+	},false)
+}
+function init()
+{
+	doBack();
+}
+window.addEventListener("load",()=>{
+	init();
+},false)
+</script>
 </head>
 <body>
-	<form action="user.role.servlet?state=update&userid=${requestScope.userid }" method="post">
+	<form action="user.role.servlet?state=update&userid=${requestScope.userid }&countpage=${requestScope.countpage}" method="post">
 		<div class="role_show bordered"  style="margin-top:5px">
 			<c:forEach items="${requestScope.roles}" var="role" varStatus="status">
 			<c:if test="${(status.index+1)%10==0 }">
@@ -27,6 +43,7 @@
 		</div>
 		<div class="bordered" style="margin-top:5px">
 			<button type="submit">修改</button>
+			<button type="button" id="btn_back">返回</button>
 		</div>
 	</form>
 </body>

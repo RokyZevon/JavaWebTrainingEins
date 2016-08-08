@@ -47,6 +47,7 @@ public class PermissionRolejdbcDao implements PermissionRoleDao{
 			e.printStackTrace();
 			
 		}
+		DBUtil.closeConn(connection);
 		return flag;
 	}
 
@@ -68,6 +69,7 @@ public class PermissionRolejdbcDao implements PermissionRoleDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(connection);
 		return map;
 	}
 
@@ -88,6 +90,7 @@ public class PermissionRolejdbcDao implements PermissionRoleDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(connection);
 		return flag;
 	}
 

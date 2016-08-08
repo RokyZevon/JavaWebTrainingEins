@@ -59,7 +59,7 @@ function cbx_select(){
 	{
 		
 		document.getElementById("btn_add").addEventListener("click",()=>{
-			window.location.href="role.add.servlet?countpage="+${requestScope.page.countpage}+"&totalpages="+${requestScope.page.totalpages };
+			window.location.href="role.add.servlet?countpage="+${requestScope.page.countpage};
 			
 		},false)
 	}
@@ -103,7 +103,44 @@ function cbx_select(){
 	function dojump_page()
 	{
 		document.getElementById("select_jump").addEventListener("change",()=>{
-			window.location.href="role.servlet?countpage="+document.getElementById("select_jump").value;
+			window.location.href="role.servlet?state=init&countpage="+document.getElementById("select_jump").value;
+		},false)
+	}
+	function dopermission()
+	{
+		document.getElementById("btn_permission").addEventListener("click",()=>{
+			var input_cbxs = document.getElementsByName("ids"); 
+			let state = "";
+			var count = 0;
+			for(let i = 0 ,len = input_cbxs.length;i<len;i++)
+			{
+				if(input_cbxs[i].checked == true)
+				{
+					count ++;
+					if(state=="")
+					{
+						state += input_cbxs[i].dataset.id; 
+					}
+					else
+					{
+						state+=",";
+						
+						state+=input_cbxs[i].dataset.id; 
+					}
+				}
+			}
+			if(count>1)
+			{
+				alert("一次只能修改一组数据，请重新选择您要修改的角色！！！");
+			}
+			else if(count==1)
+			{
+				window.location.href="permission.role.servlet?state=init&roleid="+state+"&countpage="+${requestScope.page.countpage};
+			}
+			else
+			{
+				alert("请选择您要修改的角色！！！");
+			}
 		},false)
 	}
 	function init()
@@ -113,6 +150,7 @@ function cbx_select(){
 		doAdd();
 		doUpdate();
 		dojump_page();
+		dopermission();
 	}
 	window.addEventListener( "load", ()=>{
 		init();
@@ -142,8 +180,8 @@ function cbx_select(){
 		<div class="table_row">
 			<c:if test="${requestScope.page.countpage==1 }">首页 上一页</c:if>
 			<c:if test="${requestScope.page.countpage!=1 }">
-				<a href="role.servlet?countpage=1">首页</a> 
-				<a href ="role.servlet?countpage=${requestScope.page.countpage - 1}">上一页</a> 
+				<a href="role.servlet?state=init&countpage=1">首页</a> 
+				<a href ="role.servlet?state=init&countpage=${requestScope.page.countpage - 1}">上一页</a> 
 			</c:if>
 			<select id ="select_jump">
 				<c:forEach begin="1" end="${requestScope.page.totalpages }" var="i">
@@ -157,15 +195,15 @@ function cbx_select(){
 			</select>
 			<c:if test="${requestScope.page.countpage==requestScope.page.totalpages }">下一页 尾页</c:if>
 			<c:if test="${requestScope.page.countpage!=requestScope.page.totalpages }">
-				<a href="role.servlet?countpage=${requestScope.page.countpage +1 }">下一页</a>
-				<a href="role.servlet?countpage=${requestScope.page.totalpages }">尾页</a>
+				<a href="role.servlet?state=init&countpage=${requestScope.page.countpage +1 }">下一页</a>
+				<a href="role.servlet?state=init&countpage=${requestScope.page.totalpages }">尾页</a>
 			</c:if>
-			
 		</div>
 		<div>
 			<button type = "button" id = "btn_add" >增加</button>
 			<button type = "button" id = "btn_delete">删除</button>
-			<button type = "button" id = "btn_update">修改</button>
+			<button type = "button" id = "btn_update">修改角色信息</button>
+			<button type = "button" id = "btn_permission">修改角色权限</button>
 		</div>
 	</div>
 	

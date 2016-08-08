@@ -8,9 +8,24 @@
 <head>
 <meta charset="UTF-8">
 <title>角色权限管理</title>
+<script type="text/javascript">
+function doBack()
+{
+	document.getElementById("btn_back").addEventListener("click",()=>{
+		window.location.href="role.servlet?state=init&countpage="+${countpage};
+	},false)
+}
+function init()
+{
+	doBack();
+}
+window.addEventListener("load",()=>{
+	init();
+},false)
+</script>
 </head>
 <body>
-	<form action = "permission.role.servlet?state=update&roleid=${requestScope.roleid }" method = "post" >
+	<form action = "permission.role.servlet?state=update&roleid=${requestScope.roleid }&countpage=${requestScope.countpage}" method = "post" >
 		<div class="role_show bordered"  style="margin-top:5px">
 			<c:forEach items="${requestScope.permissions }" var="permission" varStatus="status">
 				<c:if test="${(status.index+1)%10==0 }">
@@ -27,6 +42,7 @@
 		</div>
 		<div class="bordered" style="margin-top:5px">
 			<button type="submit">修改</button>
+			<button type="button" id="btn_back">返回</button>
 		</div>
 	</form>
 	

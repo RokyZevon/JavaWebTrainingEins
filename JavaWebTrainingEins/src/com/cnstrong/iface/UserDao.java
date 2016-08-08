@@ -15,6 +15,7 @@ public interface UserDao {
 	public void Userdelete(int userid);
 	public void Userupdate(int userid, String name, String password, String telephone);
 	public List<User> Userselect(int userid);
+	public boolean UserselectByName(String username);
 	public int Checked(String username, String password);
 	public Map<String, Permission> getPermission(int userid);
 }

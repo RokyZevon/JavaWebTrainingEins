@@ -16,7 +16,16 @@ public class IndexServlet extends HttpServlet {
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("Login.jsp").forward(request, response);
+		Object username = request.getSession().getAttribute("username");
+		Object password = request.getSession().getAttribute("password");
+		if (username ==null||password==null) 
+		{
+			request.getRequestDispatcher("Login.jsp").forward(request, response);
+		}
+		else
+		{
+			request.getRequestDispatcher("login.servlet?state=login").forward(request, response);
+		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

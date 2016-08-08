@@ -103,7 +103,7 @@ function cbx_select(){
 	function dojump_page()
 	{
 		document.getElementById("select_jump").addEventListener("change",()=>{
-			window.location.href="permission.servlet?countpage="+document.getElementById("select_jump").value;
+			window.location.href="permission.servlet?state=init&countpage="+document.getElementById("select_jump").value;
 		},false)
 	}
 	function init()
@@ -144,9 +144,9 @@ function cbx_select(){
 		<div  class="table_row">
 			<c:if test = "${requestScope.page.countpage==1 }">首页 &nbsp;上一页</c:if>
 			<c:if test = "${requestScope.page.countpage!=1 }">
-				<a href="permission.servlet?countpage=1">首页</a> 
+				<a href="permission.servlet?state=init&countpage=1">首页</a> 
 				&nbsp;
-				<a href="permission.servlet?countpage=${requestScope.page.countpage-1 }">上一页</a> 
+				<a href="permission.servlet?state=init&countpage=${requestScope.page.countpage-1 }">上一页</a> 
 			</c:if>
 			&nbsp;
 			<select id="select_jump">
@@ -162,9 +162,9 @@ function cbx_select(){
 			&nbsp;
 			<c:if test="${requestScope.page.countpage==requestScope.page.totalpages }">下一页&nbsp; 末页</c:if>
 			<c:if test="${requestScope.page.countpage!=requestScope.page.totalpages }">
-				<a href="permission.servlet?countpage=${requestScope.page.countpage+1 }">下一页 </a>
+				<a href="permission.servlet?state=init&countpage=${requestScope.page.countpage+1 }">下一页 </a>
 				&nbsp;
-				<a href="permission.servlet?countpage=${requestScope.page.totalpages }">末页</a>
+				<a href="permission.servlet?state=init&countpage=${requestScope.page.totalpages }">末页</a>
 			</c:if>	
 		</div>
 		<div>

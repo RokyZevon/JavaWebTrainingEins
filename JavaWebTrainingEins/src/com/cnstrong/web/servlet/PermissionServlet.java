@@ -22,7 +22,9 @@ public class PermissionServlet extends HttpServlet {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		String state = request.getParameter("state");
 		String ids = null == request.getParameter("ids")?"":request.getParameter("ids");
 		String countpage= null==request.getParameter("countpage")?"":request.getParameter("countpage");
@@ -35,17 +37,23 @@ public class PermissionServlet extends HttpServlet {
 				int n = Integer.parseInt(states[i]);
 				permissions.Permissiondelete(n);
 			}
+			request.getRequestDispatcher("permission.servlet?state=init").forward(request, response);
 		}
-		else if("add".equals(state)&&!"".equals(newids))
+		if("add".equals(state)&&!"".equals(newids))
 		{
 			String[] states = newids.split(",");
 			permissions.Permissionadd(states[0], states[1], states[2]);
+			request.getRequestDispatcher("permission.servlet?state=init").forward(request, response);
 		}
-		else if ("update".equals(state)&&!"".equals(newids)) {
+		if ("update".equals(state)&&!"".equals(newids)) 
+		{
 			String[] states = newids.split(",");
 			int n = Integer.parseInt(states[0]);
 			permissions.Permissionupdate(n, states[1], states[2], states[3]);
+			request.getRequestDispatcher("permission.servlet?state=init").forward(request, response);
 		}
+		if("init".equals(state))
+		{
 			if(countpage=="")
 			{
 				countpage="1";
@@ -63,6 +71,7 @@ public class PermissionServlet extends HttpServlet {
 			permissions.queryallBypage(page);
 			request.setAttribute("page", page);
 			request.getRequestDispatcher("views/permissionmanager.jsp").forward(request, response);
+		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

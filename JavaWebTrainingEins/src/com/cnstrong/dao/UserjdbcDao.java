@@ -12,11 +12,9 @@ import java.util.Map;
 import com.cnstrong.dbutils.DBUtil;
 import com.cnstrong.entity.Page;
 import com.cnstrong.entity.Permission;
-import com.cnstrong.entity.Role;
 import com.cnstrong.entity.User;
 import com.cnstrong.iface.RoleDao;
 import com.cnstrong.iface.UserDao;
-import com.cnstrong.iface.UserRoleDao;
 
 import org.apache.log4j.Logger;
 
@@ -46,6 +44,7 @@ public class UserjdbcDao implements UserDao{
 				e.printStackTrace();
 			}
 			page.setPagelist(list);
+			DBUtil.closeConn(conn);
 	}
 	@Override
 	public int getTotalRows() {
@@ -64,6 +63,7 @@ public class UserjdbcDao implements UserDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(connection);
 		return totalrows;
 	}
 
@@ -119,6 +119,7 @@ public class UserjdbcDao implements UserDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(conn);
 	}
 
 	@Override
@@ -138,6 +139,7 @@ public class UserjdbcDao implements UserDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(conn);
 	}
 
 	
@@ -182,7 +184,7 @@ public class UserjdbcDao implements UserDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		DBUtil.closeConn(connection);
 		return count;
 	}
 	@Override
@@ -203,7 +205,29 @@ public class UserjdbcDao implements UserDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(connection);
 		return map;
+	}
+	@Override
+	public boolean UserselectByName(String username) {
+		// TODO Auto-generated method stub
+		boolean flag = false;
+		String sql = "select * from users where name = ?";
+		Connection connection = DBUtil.getConn();
+		try {
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, username);
+			int count = statement.executeUpdate();
+			if(count>0)
+			{
+				flag=true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DBUtil.closeConn(connection);
+		return flag;
 	}
 
 	

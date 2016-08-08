@@ -43,7 +43,7 @@
 	function doBack()
 	{
 		document.getElementById("btn_back").addEventListener("click",()=>{
-			window.location.href="user.servlet?countpage="+${countpage};
+			window.location.href="user.servlet?state=init&countpage="+${countpage};
 		},false)
 	}
 	function init()

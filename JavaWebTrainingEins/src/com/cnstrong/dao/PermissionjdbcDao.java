@@ -38,6 +38,7 @@ public class PermissionjdbcDao implements PermissionDao{
 				e.printStackTrace();
 			}
 			page.setPagelist(list);
+			DBUtil.closeConn(conn);
 	}
 
 	@Override
@@ -57,6 +58,7 @@ public class PermissionjdbcDao implements PermissionDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(connection);
 		return totalrows;
 	}
 	@Override
@@ -78,6 +80,7 @@ public class PermissionjdbcDao implements PermissionDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(connection);
 		return map;
 	}
 
@@ -97,7 +100,7 @@ public class PermissionjdbcDao implements PermissionDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		DBUtil.closeConn(connection);
 	}
 
 	@Override
@@ -114,6 +117,7 @@ public class PermissionjdbcDao implements PermissionDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(connection);
 	}
 
 	@Override
@@ -133,7 +137,7 @@ public class PermissionjdbcDao implements PermissionDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		DBUtil.closeConn(connection);
 	}
 
 	@Override
@@ -156,6 +160,7 @@ public class PermissionjdbcDao implements PermissionDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DBUtil.closeConn(connection);
 		return list;
 	}
 

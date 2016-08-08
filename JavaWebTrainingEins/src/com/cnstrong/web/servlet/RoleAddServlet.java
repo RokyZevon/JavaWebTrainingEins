@@ -20,6 +20,7 @@ public class RoleAddServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		String countpage =null == request.getParameter("countpage")?"":request.getParameter("countpage");
 		request.setAttribute("countpage", countpage);
 		request.getRequestDispatcher("views/roleadd.jsp").forward(request, response);

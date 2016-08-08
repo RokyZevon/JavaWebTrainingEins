@@ -35,7 +35,7 @@
 			}
 			else
 			{
-				window.location.href="user.servlet?state=add&ids="+state;
+				window.location.href="user.servlet?state=add&ids="+state+"&countpage="+${countpage};
 			}
 		},false)
 	}
@@ -48,7 +48,7 @@
 	function doBack()
 	{
 		document.getElementById("btn_back").addEventListener("click",()=>{
-			window.location.href="user.servlet?countpage="+${countpage};
+			window.location.href="user.servlet?state=init&countpage="+${countpage};
 		},false)
 	}
 	function init()
@@ -63,6 +63,7 @@
 </script>
 <body>
 	<div id="div_table">
+		${requestScope.Word }<br/>
 		<table class="bordered">
 			<tbody id="show_tbody">
 				<tr>

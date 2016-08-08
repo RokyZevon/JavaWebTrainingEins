@@ -30,12 +30,13 @@ public class PermissionRoleServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		String state = request.getParameter("state");
 		String roleid = null == request.getParameter("roleid")?"":request.getParameter("roleid");
-
+		String countpage = request.getParameter("countpage");
 		if("init".equals(state)&&!"".equals(roleid))
 		{
 			Map<String, Permission> map = permissionRoleService.getpermission(roleid);
 			request.setAttribute("permissions", map);
 			request.setAttribute("roleid", roleid);
+			request.setAttribute("countpage", countpage);
 			request.getRequestDispatcher("views/permissionrolemanager.jsp").forward(request, response);
 		}
 		if ("update".equals(state)) 

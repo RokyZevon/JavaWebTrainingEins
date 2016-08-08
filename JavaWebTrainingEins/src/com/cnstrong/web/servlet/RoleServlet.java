@@ -21,6 +21,9 @@ public class RoleServlet extends HttpServlet {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		String state = request.getParameter("state");
 		String ids = null == request.getParameter("ids")?"":request.getParameter("ids");
 		String countpage = null == request.getParameter("countpage")?"":request.getParameter("countpage");
@@ -33,18 +36,22 @@ public class RoleServlet extends HttpServlet {
 				int n = Integer.parseInt(states[i]);
 				roles.Roledelete(n);
 			}
+			request.getRequestDispatcher("role.servlet?state=init").forward(request, response);
 		}
-		else if("add".equals(state)&&!"".equals(newids))
+		if("add".equals(state)&&!"".equals(newids))
 		{
 			String[] states = newids.split(",");
 			roles.Roleadd(states[0], states[1]);
+			request.getRequestDispatcher("role.servlet?state=init").forward(request, response);
 		}
-		else if ("update".equals(state)&&!"".equals(newids)) {
+		if ("update".equals(state)&&!"".equals(newids)) {
 			String[] states = newids.split(",");
 			int n = Integer.parseInt(states[0]);
 			roles.Roleupdate(n, states[1], states[2]);
+			request.getRequestDispatcher("role.servlet?state=init").forward(request, response);
 		}
-	
+		if("init".equals(state))
+		{
 			if(countpage=="")
 			{
 				countpage = "1";
@@ -62,6 +69,7 @@ public class RoleServlet extends HttpServlet {
 			roles.queryallBypage(page);
 			request.setAttribute("page", page);
 			request.getRequestDispatcher("views/rolemanager.jsp").forward(request, response);
+		}
 		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
